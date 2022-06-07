@@ -1,0 +1,25 @@
+Task 1 - Policy Iteration
+
+Answers:
+
+
+7) 	Rounds of policy iteration for start state to become non-zero: xxx
+
+8) 	Rounds of policy iteration to converge to an optimal policy: xxx
+
+ policy
+ at (-1, -1) move None
+at (0, 0) move east
+at (0, 1) move east
+at (0, 2) move east
+at (0, 3) move exit
+at (1, 2) move north
+at (2, 0) move south
+at (2, 2) move north
+at (2, 3) move west
+at (3, 0) move south
+at (3, 3) move north
+at (4, 0) move east
+at (4, 1) move east
+at (4, 2) move east
+at (4, 3) move north
