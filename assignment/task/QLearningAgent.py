@@ -52,9 +52,7 @@ class QLearningAgent(Agent):
         # *********
         # TODO 3.2.
         self.addNewKeyValInQ(state, action)
-        # qVal = self.Q[state][action]
         return self.Q[state][action]
-        # return qVal
         # *********
 
     def getPolicy(self, state):
@@ -71,24 +69,27 @@ class QLearningAgent(Agent):
         if len(all_actions) > 0:
             # *********
             # TODO 3.3.01
+            # for a in all_actions:
+            #     self.addNewKeyValInQ(state, a)
             action = np.random.choice(all_actions)
-            for action01 in all_actions:
-                self.addNewKeyValInQ(state, action01)
-
-            # self.addNewKeyValInQ(state, action)
+            self.addNewKeyValInQ(state, action)
             return action
             # *********
         else:
-            # TODO 3.3.03
-            self.addNewKeyValInQ(state, "exit")
             return "exit"
 
     def getAction(self, state):
         """ Choose an action: this will require that your agent balance exploration and exploitation as appropriate. """
         # *********
         # TODO 3.4.
+        # all_actions = self.actionFunction(state)
+        # # for action01 in all_actions:
+        # #     self.addNewKeyValInQ(state, action01)
+        # return np.random.choice(all_actions) if np.random.rand() < self.epsilon \
+        #     else self.getPolicy(state)
         return self.getRandomAction(state) if np.random.rand() < self.epsilon \
             else self.getPolicy(state)
+
         # *********
 
     def update(self, state, action, nextState, reward):
@@ -98,10 +99,14 @@ class QLearningAgent(Agent):
         self.addNewKeyValInQ(state, action)
 
         nextAction = self.getPolicy(nextState)
-        self.addNewKeyValInQ(nextState, nextAction)
-        self.Q[state][action] = self.Q[state][action] + self.learningRate * \
-                                (reward + self.discount * self.Q[nextState][nextAction] -
-                                 self.Q[state][action])
+        # self.addNewKeyValInQ(nextState, nextAction)
+
+        sample = reward + self.discount * self.Q[nextState][nextAction]
+        self.Q[state][action] = (1 - self.learningRate) * self.Q[state][action] + self.learningRate * sample
+
+        # self.Q[state][action] = self.Q[state][action] + self.learningRate * \
+        #                         (reward + self.discount * self.Q[nextState][nextAction] -
+        #                          self.Q[state][action])
         # if 'exit' in self.Q[state]:
         #     print(state, self.Q[state])
         #     print(nextState, self.Q[nextState])

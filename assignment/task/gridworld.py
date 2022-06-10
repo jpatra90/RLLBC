@@ -186,7 +186,7 @@ def parseOptions():
                          metavar="K",
                          help='Number of rounds of policy evaluation or value iteration (default %default)')
     optParser.add_option('-k', '--episodes', action='store',
-                         type='int', dest='episodes', default=100,
+                         type='int', dest='episodes', default=0,
                          metavar="K", help='Number of epsiodes of the MDP to run (default %default)')
     optParser.add_option('-g', '--grid', action='store',
                          metavar="G", type='string', dest='grid', default="BookGrid",
